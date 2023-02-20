@@ -1,4 +1,4 @@
-class Peronaje:
+class Personaje:
     
     #Atributos
     especie="Humanos"
@@ -12,3 +12,11 @@ class Peronaje:
             print("El personaje " + self.nombre +" Esta corriendo")
         else:
             print("El personaje " + self.nombre +" se detuvo")
+    
+    def lanzarGranadas(self):
+        print("El personaje " + self.nombre + "lanzo granada")
+        
+    def recargarArma(self,municiones):
+        cargador=10
+        cargador=cargador+municiones
+        print("El arma recargada tiene " + cargador + "balas")

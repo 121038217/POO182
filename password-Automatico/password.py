@@ -1,28 +1,39 @@
-from tkinter import *
-from comprobar import comp
-from pass import passm
-import tkinter as tk 
+import tkinter as tk
+import string
+import random
+from tkinter import messagebox
+from comprobar import *
+    
+ventana = tk.Tk()
+ventana.title("Generador de contraseñas")
 
-a = comp()
-def ejecutar():
-        a.comprobar(long.get())
-        
-ventana = Tk()
-ventana.title(" Password Automático")
-ventana.geometry("400x300")
+longitud = tk.Label(ventana, text="Longitud:")
+longitud.pack()
+largoo = tk.StringVar(value="8")
+Longitud = tk.Entry(ventana, textvariable=largoo)
+Longitud.pack()
 
-seccion1=Frame(ventana,bg="white")
-seccion1.pack(expand=True,fill='both')
+may = tk.BooleanVar()
+Mayusculas = tk.Checkbutton(ventana, text="Incluir mayúsculas", variable=may)
+Mayusculas.pack()
 
-long = tk.StringVar
-long=Label(seccion1,text=" Ingresar contraseña")
-long.place(x=100,y=10)
-caja1 = Entry(seccion1)
-caja1.place(x=200,y=10)
+esp = tk.BooleanVar()
+Especial = tk.Checkbutton(ventana, text="Incluir caracteres especiales", variable=esp)
+Especial.pack()
 
 
 
-botonComprobar=Button(seccion1,text="Comprobar",bg="#7399bf",fg="black",command=ejecutar)
-botonComprobar.place(x=180,y=160,width=100,height=30)
+contr = tk.StringVar()
+passw = tk.Entry(ventana, textvariable=contr)
+passw.pack()
 
+fort = tk.IntVar()
+fortal = tk.Label(ventana, text="Fortaleza: ")
+fortal.pack()
+fortaleza = tk.Label(ventana, textvariable=fort)
+fortaleza.pack()
+
+gen = GenerarContraseña(Longitud, may, esp, contr, fort)
+generar = tk.Button(ventana, text="Generar contraseña", command=gen.generar_contraseña)
+generar.pack()
 ventana.mainloop()

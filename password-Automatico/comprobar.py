@@ -1,34 +1,46 @@
-from tkinter import Tk,Button,Frame, messagebox, LabelFrame
-from string import ascii_letters,digits,punctuation
-import secrets
-#from pass import passm
+import string
+import random
+from tkinter import messagebox
+class GenerarContraseña:
+    def __init__(self, Longitud, may, esp, contr, fort):
+        self.Longitud = Longitud
+        self.may = may
+        self.esp = esp
+        self.contr = contr
+        self.fort = fort
 
-class comp():
-    def __init__ (self):
+    def generar_contraseña(self):
+        largo = int(self.Longitud.get())
+        Mayus = self.may.get()
+        especial = self.esp.get()
         
-        #Lista con letras en minusculas y mayusculas
-        self.__letters = ascii_letters
+        caracteres = string.ascii_lowercase
+        if Mayus:
+            caracteres += string.ascii_uppercase
+        if especial:
+            caracteres += string.punctuation
         
-        #Nos dara la lista de los numeros
-        self.__digits = digits
+        password = ''.join(random.choice(caracteres) for i in range(largo))
+        self.contr.set(password)
+        messagebox.showinfo("Contraseña","La contraseña generada es: " + password)
         
-        #Nos dara los caracteres
-        self.__punctuation = punctuation
-       
-        def letters(self):
-            return self.__letters 
-        
-        def digits(self):
-            return self.__digits
-        
-        def punctuation(self):
-            return self.__punctuation
-        
-    def __init__(self,long):
-        long = 8
-        self.__contraseña = contraseña = ""
-        
-        for i in range(long):
-            #choice es para elegir un elemento aleatorio
-            contraseña += ' '(secrets.choice(contraseña))
-            messagebox.showinfo("Exito",contraseña)
+        score = 0
+        if any(c.isupper() for c in password):
+            score += 1
+        if any(c.islower() for c in password):
+            score += 1
+        if any(c in string.punctuation for c in password):
+            score += 2
+        if largo >= 12:
+            score += 1
+        if score == 1:
+            ff="Contraseña muy debil"
+        elif score == 2:
+            ff="Contraseña debil"
+        elif score == 3:
+            ff="Contraseña media"
+        elif score == 4:
+            ff="Contraseña fuerte"
+        elif score == 5:
+            ff="Contraseña muy fuerte"
+        self.fort.set(ff)
